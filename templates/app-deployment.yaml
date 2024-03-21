@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Values.mytodoapp.labels.app }}
+  name: {{ .Values.mytodoapp.name }}
+spec:
+  replicas: {{ .Values.mytodoapp.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.mytodoapp.labels.app }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.mytodoapp.labels.app }}
+    spec:
+      containers:
+      - image: {{ .Values.mytodoapp.image }}
+        name: mytodoapp
+        ports:
+        - containerPort: {{ .Values.mytodoapp.service.port }}
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: {{ .Values.mytodoapp.resources.limits.memory }}
+            cpu: {{ .Values.mytodoapp.resources.limits.cpu }}
+          requests:
+            memory: {{ .Values.mytodoapp.resources.requests.memory }}
+            cpu: {{ .Values.mytodoapp.resources.requests.cpu }}

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.mytodoapp.service.name }}
+  labels:
+    app: {{ .Values.mytodoapp.labels.app }}
+spec:
+  selector:
+    app:  {{ .Values.mytodoapp.labels.app }}
+  ports:
+    - protocol: TCP
+      port: {{ .Values.mytodoapp.service.port }}
+      targetPort: {{ .Values.mytodoapp.service.targetPort}}
+      name: {{ .Values.mytodoapp.service.name }}
+  type: {{ .Values.mytodoapp.service.type }}
