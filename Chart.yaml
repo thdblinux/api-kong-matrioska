@@ -4,4 +4,4 @@ description: Geradoe de tarefas criado usando NodeJS
 version: 0.1.0
 appVersion: "1.0"
 sources:
-  - https://github.com/thdevopssre/learn_docker
+  - https://github.com/thdevopssre/api-kong-matrioska.git

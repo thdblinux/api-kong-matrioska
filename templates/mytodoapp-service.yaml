@@ -1,20 +1,23 @@
-{{-  range .Values.mytodoapp.ports }}
+{{- range $component, $config := .Values.services }}
+  {{- range $port := $config.ports }}
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .name }}
+  name: {{ $component }}-{{ $port.name }}
   labels:
-    app: {{.name }}
+    app: {{ $config.labels.app}}
 spec:
-  type: {{.servicetype }}
+  type: {{ $port.serviceType }}
   ports:
-  - name: {{ .name }}
-    port: {{.port }}
-{{- if eq .serviceType "NodePort" }}
-    nodePort: {{.NodePort }}
-{{- end }}
-    targetPort: {{.targetPort }}
+  - port: {{ $port.port }}
+    targetPort: {{ $port.targetPort }}
+    protocol: TCP
+    name: {{ $port.name }}
+    {{- if eq $port.serviceType "NodePort" }}
+    nodePort: {{ $port.nodePort }}
+    {{- end }}
   selector:
-    app: mytodoapp
+    app: {{ $config.labels.app }}
 ---
+  {{- end }}
 {{- end }}

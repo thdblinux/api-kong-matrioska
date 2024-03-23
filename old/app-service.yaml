@@ -10,6 +10,6 @@ spec:
   ports:
     - protocol: TCP
       port: {{ .Values.mytodoapp.service.port }}
-      targetPort: {{ .Values.mytodoapp.service.targetPort}}
+      targetPort: {{ .Values.mytodoapp.service.targetPort }}
       name: {{ .Values.mytodoapp.service.name }}
   type: {{ .Values.mytodoapp.service.type }}
