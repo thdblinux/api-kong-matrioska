@@ -1,8 +1,8 @@
 {{/* Define a base para reutilização de labels */}}
 {{- define "app.labels" -}}
-app: {{ .labels.app }}
-env: {{ .labels.env }}
-dev: {{ .labels.dev }}
+app: {{ .labels.app | quote }}
+env: {{ .labels.env | quote }}
+dev: {{ .labels.dev | quote }}
 {{- end }}
 
 {{/* Template para especificações de recursos de containers */}}
