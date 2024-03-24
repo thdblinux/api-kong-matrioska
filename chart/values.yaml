@@ -2,7 +2,7 @@ deployments:
   mytodoapp:
     name: "mytodoapp"
     image: "thsre/mytodoapp"
-    replicas: "3"
+    replicas: "4"
     labels:
       app: "mytodoapp"
       env: "labs"
@@ -26,7 +26,7 @@ deployments:
       type: "ClusterIP"
       port: 6379
       targetPort: 6379
-      name: "app"
+      name: "redis-port"
     resources:
       requests:
         memory: "128Mi"
@@ -39,12 +39,12 @@ services:
     ports:
       - port: 3000
         targetPort: 3000
-        name: "app"
+        name: "mytodoapp-app"
         serviceType: NodePort
         NodePort: 32500
       - port: 8088
         targetPort: 8088
-        name: "metrics"
+        name: "mytodoapp-metrics"
         serviceType: ClusterIP
     labels:
       app: "mytodoapp"
@@ -54,22 +54,9 @@ services:
     ports:
       - port: 6379
         targetPort: 6378
-        name: "service"
+        name: "redis-port"
         serviceType: ClusterIP
     labels:
       app: "redis"
       env: "labs"
       dev: "true"
-observability:
-  mytodoapp:
-    logging: true
-    metrics:
-      enabled: true
-      path: "/metrics"
-databases:
-  mytodoapp:
-    mysql:
-      type: "Mysql"
-      host: "mysql.svc.cluster.local"
-      port: 3306
-      name: "MyDB" 
