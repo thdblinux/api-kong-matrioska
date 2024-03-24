@@ -14,7 +14,7 @@ deployments:
         memory: "256Mi"
         cpu: "500m"
   redis:
-    image: "redis-helm"
+    image: "redis"
     replicas: 1
     port: 6379
     labels:
