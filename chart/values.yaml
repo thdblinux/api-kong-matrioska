@@ -6,6 +6,7 @@ deployments:
     labels:
       app: "mytodoapp"
       env: "labs"
+      dev: "true"
     resources:
       requests:
         memory: "128Mi"
@@ -20,6 +21,7 @@ deployments:
     labels:
       app: "redis"
       env: "labs"
+      dev: "true"
     service:
       type: "ClusterIP"
       port: 6379
@@ -47,6 +49,7 @@ services:
     labels:
       app: "mytodoapp"
       env: "labs"
+      dev: "true"
   redis:
     ports:
       - port: 6379
@@ -56,6 +59,7 @@ services:
     labels:
       app: "redis"
       env: "labs"
+      dev: "true"
 observability:
   mytodoapp:
     logging: true

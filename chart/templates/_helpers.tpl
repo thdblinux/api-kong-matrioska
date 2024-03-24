@@ -40,6 +40,6 @@ kind: ConfigMap
 metadata:
   name: {{ .component }}-observability-config
 data:
-  app-config.json: | 
+  app-config.json: |
     {{ toJson .config }}
 {{- end }}
