@@ -2,7 +2,7 @@ deployments:
   mytodoapp:
     name: "mytodoapp"
     image: "thsre/mytodoapp"
-    replicas: "4"
+    replicas: "2"
     labels:
       app: "mytodoapp"
       env: "labs"
