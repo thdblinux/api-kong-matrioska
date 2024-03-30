@@ -1,3 +1,0 @@
-[submodule "terraform"]
-	path = terraform
-	url = https://github.com/thdevopssre/api-kong-matrioska/blob/main/terraform
