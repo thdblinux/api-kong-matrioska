@@ -43,3 +43,16 @@ data:
   app-config.json: |
     {{ toJson .config }}
 {{- end }}
+
+{{/* Template para gerar configurações do Ingress */}}
+{{- define "ingress.customConfig" -}}
+{{ if .Values.ingress.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .component }}-ingress-config
+data:
+  ingress.yaml: |
+    {{- toYaml .config | nindent 4 }}
+{{ end }}
+{{- end -}}

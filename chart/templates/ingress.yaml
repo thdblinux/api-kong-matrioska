@@ -1,0 +1,30 @@
+{{ if .Values.ingress.enabled }}
+{{- range $component, $config := .Values.ingress }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ $component }}
+  labels:
+    {{- include "app.labels" $config | nindent 4 }}
+  annotations:
+    nginx.ingress.kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: "letsencrypt"
+spec:
+  ingressClassName:
+  rules:
+  tls:
+    - hosts:
+        - {{ $config.host }}
+      secretName: {{ $component }}-tls
+    - host: {{ $config.host }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ $component }}
+                port:
+                  number: {{ .Values.service.port }}
+{{ end }}
+{{ end }}
