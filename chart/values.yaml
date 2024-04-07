@@ -37,10 +37,10 @@ deployments:
 services:
   mytodoapp:
     ports:
-      - port: 3000
-        targetPort: 3000
+      - port: 33000
+        targetPort: 33000
         name: "mytodoapp-app"
-        serviceType: LoadBalancer
+        serviceType: NodePort
         NodePort: 32500
       - port: 8088
         targetPort: 8088
